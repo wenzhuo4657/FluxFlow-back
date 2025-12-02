@@ -11,16 +11,27 @@ public   class   DocsItemType{
         private static DocsItemFiled.ItemFiled[] Daily_Base_Field=
                 new DocsItemFiled.ItemFiled[]{ DocsItemFiled.ItemFiled.data
         };
-        private static DocsItemFiled.ItemFiled[] Check_List_Field=
-                new DocsItemFiled.ItemFiled[]{ DocsItemFiled.ItemFiled.status,
-             DocsItemFiled.ItemFiled.data,
+
+        private static DocsItemFiled.ItemFiled[] Plan_I_Field=
+                new DocsItemFiled.ItemFiled[]{
+             DocsItemFiled.ItemFiled.status,
+             DocsItemFiled.ItemFiled.time_point,
+             DocsItemFiled.ItemFiled.title
+        };
+
+        private static  DocsItemFiled.ItemFiled[] Plan_II_Field=
+                new DocsItemFiled.ItemFiled[]{
+             DocsItemFiled.ItemFiled.status,
+             DocsItemFiled.ItemFiled.data_start,
+             DocsItemFiled.ItemFiled.data_end,
              DocsItemFiled.ItemFiled.title
         };
 
 
         public  enum  ItemType{
             dailyBase("dailyBase", Daily_Base_Field),
-            checkList("checkList", Check_List_Field)
+            Plan_I("Plan_I", Plan_I_Field),
+            Plan_II("Plan_II", Plan_II_Field)
             ;
 
             ItemType(String typeName, DocsItemFiled.ItemFiled[] filed) {

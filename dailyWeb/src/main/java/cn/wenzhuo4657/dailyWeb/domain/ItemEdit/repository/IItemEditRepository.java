@@ -12,12 +12,6 @@ public interface IItemEditRepository {
     List<DocsItem> getDocsItems(Long docs_Id);
 
 
-
-
-
-
-
-
     boolean addItem(DocsItem docs_Id);
 
 

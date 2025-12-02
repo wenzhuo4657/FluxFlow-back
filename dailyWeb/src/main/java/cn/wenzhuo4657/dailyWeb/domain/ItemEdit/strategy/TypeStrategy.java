@@ -7,6 +7,7 @@ import cn.wenzhuo4657.dailyWeb.domain.ItemEdit.strategy.function.TitleFn;
 import cn.wenzhuo4657.dailyWeb.infrastructure.database.entity.DocsItem;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -21,6 +22,8 @@ public interface TypeStrategy {
      * @throws ClassNotFoundException
      */
     String toFiled(String typeName)throws ClassNotFoundException;
+    String toFiled(String typeName, Map<String,String> fieldMap)throws ClassNotFoundException;
+
 
     List<ItemDto>  apply(String  typeName, List<DocsItem> item) throws ClassNotFoundException;
 

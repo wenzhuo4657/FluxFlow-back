@@ -16,7 +16,6 @@ public class InsertItemDto {
     private Long docsId;
 
     @NotNull
-
     private String typeName;
 
     public InsertItemDto() {

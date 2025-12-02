@@ -24,7 +24,10 @@ public class TypeFunction {
                 return  map.get(DocsItemFiled.ItemFiled.data.getFiled());
             }
 
-            if (itemType.getTypeName().equals(DocsItemType.ItemType.checkList.getTypeName())){
+            if (itemType.getTypeName().equals(DocsItemType.ItemType.Plan_I.getTypeName())
+                ||
+                    itemType.getTypeName().equals(DocsItemType.ItemType.Plan_II.getTypeName())
+            ){
                 Map<String, String> map = DocsItemFiled.toMap(item.getItemField());
                 return  map.get(DocsItemFiled.ItemFiled.title.getFiled());
             }
@@ -47,7 +50,9 @@ public class TypeFunction {
     public static ExpandFn toExpand = new ExpandFn() {
         @Override
         public String apply(DocsItemType.ItemType itemType, DocsItem item) throws ClassNotFoundException {
-            if (itemType.getTypeName().equals(DocsItemType.ItemType.checkList.getTypeName())){
+            if (itemType.getTypeName().equals(DocsItemType.ItemType.Plan_I.getTypeName())
+                    ||
+                       itemType.getTypeName().equals(DocsItemType.ItemType.Plan_II.getTypeName())){
                 Map<String, String> map = DocsItemFiled.toMap(item.getItemField());
                 return  map.get(DocsItemFiled.ItemFiled.status.getFiled());
             }

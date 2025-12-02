@@ -20,20 +20,29 @@ public class DocsItemFiled {
      * 合法属性记录
      * ps（1）： 关于属性值的解析和变更不去控制，仅仅保证所有field属性都为合法属性，且设置默认值
      * ps（2） 所有属性值都为字符串形式
+     * ps(3) 属性值含义唯一，避免意义混淆，尽管他们处于不同文档类型，他每个属性的含义都是一样的
      */
     public  enum ItemFiled{
-        title("title","摸鱼~~~~~"),
-        status("status","false"),
-        data("data","null");
+        title("title","摸鱼~~~~~","文档项的标题"),
+        status("status","false","表示该文档项是否完成，主要用于任务类型"),
+        data("data","null","文档项定位的日期，主要用于定位每日日报的时间轴标题"),
+//        data_start/data_end的时间精度一般为日
+        data_start("data_start","null","时间起点，与data_end成对表示，用于确定文档项的时间范围起点"),
+        data_end("data_end","null","时间终点，与data_start成对表示，用于确定文档项的时间范围终点,null表示没有设置终点，即一直执行"),
+//         time_point的时间精度为分钟
+        time_point("time_point","null","时间点，用于确定文档项的时间范围起点或终点，精度为分钟")
+        ;
 
 
         private String filed;
         private String Default;
+        private  String description;
 
 
-        ItemFiled(String filed, String Default) {
+        ItemFiled(String filed, String aDefault, String description) {
             this.filed = filed;
-            this.Default = Default;
+            Default = aDefault;
+            this.description = description;
         }
 
         public String getFiled() {
