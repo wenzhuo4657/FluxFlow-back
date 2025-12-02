@@ -11,15 +11,15 @@ public class QueryItemDto {
     private Long docsId;
 
     @NotNull
-    private String typeName;
+    private int type;
 
 
     public QueryItemDto() {
     }
 
-    public QueryItemDto(Long docsId, String typeName) {
+    public QueryItemDto(Long docsId, int type) {
         this.docsId = docsId;
-        this.typeName=typeName;
+        this.type=type;
 
     }
 
@@ -32,12 +32,12 @@ public class QueryItemDto {
     }
 
 
-    public String getTypeName() {
-        return typeName;
+    public int getType() {
+        return type;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setType(int type) {
+        this.type = type;
     }
 }
 

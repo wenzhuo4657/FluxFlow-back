@@ -13,7 +13,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="DocsItemMap">
         select
-            id, index, docs_id, item_content, item_Field
+            id, `index`, docs_id, item_content, item_Field
         from docs_item
         where id = #{id}
     </select>
@@ -57,12 +57,12 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into docs_item(index, docs_id, item_content, item_Field)
+        insert into docs_item(`index`, docs_id, item_content, item_Field)
         values (#{index}, #{docsId}, #{itemContent}, #{itemField})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into docs_item(index, docs_id, item_content, item_Field)
+        insert into docs_item(`index`, docs_id, item_content, item_Field)
         values
         <foreach collection="entities" item="entity" separator=",">
         (#{entity.index}, #{entity.docsId}, #{entity.itemContent}, #{entity.itemField})
@@ -70,7 +70,7 @@
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into docs_item(index, docs_id, item_content, item_Field)
+        insert into docs_item(`index`, docs_id, item_content, item_Field)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.index}, #{entity.docsId}, #{entity.itemContent}, #{entity.itemField})

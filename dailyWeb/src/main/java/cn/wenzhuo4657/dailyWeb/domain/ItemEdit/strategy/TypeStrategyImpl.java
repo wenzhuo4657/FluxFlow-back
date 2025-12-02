@@ -20,21 +20,21 @@ import java.util.Map;
 public    class TypeStrategyImpl implements TypeStrategy {
 
 
-    protected DocsItemType.ItemType router(String typeName) throws ClassNotFoundException {
-        return DocsItemType.ItemType.valueOfByName(typeName);
+    protected DocsItemType.ItemType router(int type) throws ClassNotFoundException {
+        return DocsItemType.ItemType.valueOfByCode(type);
     }
 
 
 
     @Override
-    public String toFiled(String typeName) throws ClassNotFoundException {
-        DocsItemType.ItemType itemType  = router(typeName);
+    public String toFiled(int type) throws ClassNotFoundException {
+        DocsItemType.ItemType itemType  = router(type);
         return TypeFunction.toField.toField(itemType);
     }
 
     @Override
-    public String toFiled(String typeName, Map<String, String> fieldMap) throws ClassNotFoundException {
-        String filed = toFiled(typeName);
+    public String toFiled(int type, Map<String, String> fieldMap) throws ClassNotFoundException {
+        String filed = toFiled(type);
 
         Map<String, String> map = DocsItemFiled.toMap(filed);
 
@@ -47,8 +47,8 @@ public    class TypeStrategyImpl implements TypeStrategy {
     }
 
     @Override
-    public List<ItemDto> apply(String typeName, List<DocsItem> items) throws ClassNotFoundException {
-        DocsItemType.ItemType itemType  = router(typeName);
+    public List<ItemDto> apply(int type, List<DocsItem> items) throws ClassNotFoundException {
+        DocsItemType.ItemType itemType  = router(type);
 
         List<ItemDto> list=new ArrayList<>(items.size());
 

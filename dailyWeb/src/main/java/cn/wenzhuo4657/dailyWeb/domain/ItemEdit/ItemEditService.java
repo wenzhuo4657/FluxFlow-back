@@ -43,13 +43,14 @@ public  class ItemEditService implements baseService,PlanService {
             if (!mdRepository.isPermissions(dto.getDocsId(),userId)){
                 throw  new AppException(ResponseCode.NOT_PERMISSIONS);
             }
-            String filed = strategy.toFiled(dto.getTypeName());
+            String filed = strategy.toFiled(dto.getType());
 
             DocsItem item=new DocsItem();
             item.setDocsId(dto.getDocsId());
             item.setItemField(filed);
             item.setItemContent("");
             item.setIndex(SnowflakeUtils.getSnowflakeId());
+
 
             return mdRepository.addItem(item);
 
@@ -65,7 +66,7 @@ public  class ItemEditService implements baseService,PlanService {
 
 
         try {
-            String filed = strategy.toFiled(dto.getTypeName(),fieldMap);
+            String filed = strategy.toFiled(dto.getType(),fieldMap);
             DocsItem item=new DocsItem();
             item.setDocsId(dto.getDocsId());
             item.setItemField(filed);
@@ -89,7 +90,7 @@ public  class ItemEditService implements baseService,PlanService {
 
         try {
             List<DocsItem> docsItems = mdRepository.getDocsItems(dto.getDocsId());
-            return  strategy.apply(dto.getTypeName(), docsItems);
+            return  strategy.apply(dto.getType(), docsItems);
         }catch (ClassNotFoundException e){
             throw  new AppException(ResponseCode.MISSING_CREDENTIALS);
         }

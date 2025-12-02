@@ -12,6 +12,7 @@ import cn.wenzhuo4657.dailyWeb.infrastructure.database.entity.Docs;
 import cn.wenzhuo4657.dailyWeb.infrastructure.database.entity.DocsType;
 import cn.wenzhuo4657.dailyWeb.infrastructure.database.entity.User;
 import cn.wenzhuo4657.dailyWeb.infrastructure.database.entity.UserAuth;
+import cn.wenzhuo4657.dailyWeb.types.utils.SnowflakeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -65,6 +66,7 @@ public class AuthRepository  implements IAuthRepository {
             Docs docs = new Docs();
             docs.setName("default");
             docs.setTypeId(docsType.getTypeId());
+            docs.setDocsId(SnowflakeUtils.getSnowflakeId());
 
             docs.setCreateTime(simpleDateFormat.format(new Date()));
             docs.setUpdateTime(simpleDateFormat.format(new Date()));

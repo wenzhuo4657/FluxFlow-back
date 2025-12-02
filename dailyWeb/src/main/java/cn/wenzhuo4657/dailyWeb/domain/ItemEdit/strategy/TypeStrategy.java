@@ -17,15 +17,12 @@ public interface TypeStrategy {
 
     /**
      * 初始化field属性
-     * @param typeName
-     * @return
-     * @throws ClassNotFoundException
      */
-    String toFiled(String typeName)throws ClassNotFoundException;
-    String toFiled(String typeName, Map<String,String> fieldMap)throws ClassNotFoundException;
+    String toFiled(int type)throws ClassNotFoundException;
+    String toFiled(int type, Map<String,String> fieldMap)throws ClassNotFoundException;
 
 
-    List<ItemDto>  apply(String  typeName, List<DocsItem> item) throws ClassNotFoundException;
+    List<ItemDto>  apply(int type  , List<DocsItem> item) throws ClassNotFoundException;
 
 
 

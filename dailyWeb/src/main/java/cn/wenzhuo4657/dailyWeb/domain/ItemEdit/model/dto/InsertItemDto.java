@@ -16,15 +16,15 @@ public class InsertItemDto {
     private Long docsId;
 
     @NotNull
-    private String typeName;
+    private int type;
 
     public InsertItemDto() {
     }
 
-    public InsertItemDto(Long docsId, String type) {
-        this.docsId = docsId;
-        this.typeName = type;
 
+    public InsertItemDto(Long docsId, int type) {
+        this.docsId = docsId;
+        this.type = type;
     }
 
     public Long getDocsId() {
@@ -39,12 +39,13 @@ public class InsertItemDto {
         this.docsId = docsId;
     }
 
-    public String getTypeName() {
-        return typeName;
+
+    public int getType() {
+        return type;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setType(int type) {
+        this.type = type;
     }
 }
 

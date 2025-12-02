@@ -29,7 +29,7 @@ public  class UserService  implements IUserService {
             userDto.setName(registerByOauthDto.getOauth_provider_username());
             userDto.setUserId(SnowflakeUtils.getSnowflakeId());
             userDto.setAvatarUrl(registerByOauthDto.getOauth_provider_avatar());
-            userDto.setOauthProvider(registerByOauthDto.getOauth_provider_user_id());
+            userDto.setOauthUserid(registerByOauthDto.getOauth_provider_user_id());
             userDto.setOauthProvider(registerByOauthDto.getOauth_provider());
             aggregate.setUser(userDto);
             userEntity=authRepository.initUser(aggregate);
@@ -38,7 +38,7 @@ public  class UserService  implements IUserService {
         UserDto dto=new UserDto();
         dto.setUsername(userEntity.getName());
         dto.setAvatar(userEntity.getAvatarUrl());
-        dto.setId(userEntity.getId());
+        dto.setId(userEntity.getUserId());
         return dto;
     }
 
