@@ -8,12 +8,12 @@ public class InsertItemRequest {
     private String docsId;
 
     @NotNull
-    private int type;
+    private String type;
 
     public InsertItemRequest() {
     }
 
-    public InsertItemRequest(String docsId, int type) {
+    public InsertItemRequest(String docsId, String type) {
         this.docsId = docsId;
         this.type = type;
     }
@@ -26,11 +26,12 @@ public class InsertItemRequest {
         this.docsId = docsId;
     }
 
-    public int getType() {
+
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

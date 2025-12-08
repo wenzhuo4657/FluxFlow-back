@@ -16,6 +16,7 @@ public interface baseService {
     /**
      * 增加item
      */
+    @Deprecated
     boolean insertItem(InsertItemDto dto,Long userId);
 
     /**
@@ -33,4 +34,6 @@ public interface baseService {
      * 获取item
      */
     List<ItemDto> getItem(QueryItemDto dto);
+
+//    todo 提供删除item能力
 }

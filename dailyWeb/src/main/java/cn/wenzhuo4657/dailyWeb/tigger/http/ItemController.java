@@ -56,7 +56,7 @@ public class ItemController {
     public ResponseEntity<?> insertItem(@Valid @RequestBody InsertItemRequest request) {
         InsertItemDto body = new InsertItemDto();
         body.setDocsId(Long.valueOf(request.getDocsId()));
-        body.setType(request.getType());
+        body.setType(Integer.valueOf(request.getType()));
         boolean ok = itemEditService.insertItem(body, AuthUtils.getLoginId());
         return ResponseEntity.ok(Map.of("success", ok));
     }

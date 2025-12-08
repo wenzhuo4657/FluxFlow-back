@@ -1,9 +1,14 @@
 package cn.wenzhuo4657.dailyWeb.domain.ItemEdit.model.vo;
 
 
+import cn.wenzhuo4657.dailyWeb.types.Exception.AppException;
+import cn.wenzhuo4657.dailyWeb.types.Exception.ResponseCode;
+import io.micrometer.common.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,11 +26,12 @@ public class DocsItemFiled {
      * ps（1）： 关于属性值的解析和变更不去控制，仅仅保证所有field属性都为合法属性，且设置默认值
      * ps（2） 所有属性值都为字符串形式
      * ps(3) 属性值含义唯一，避免意义混淆，尽管他们处于不同文档类型，他每个属性的含义都是一样的
+     * ps(4)  默认是为null的属性表示需要动态初始化（有的不需要参数，有的需要参数），动态初始化逻辑在ItemFiled#toFiled
      */
     public  enum ItemFiled{
         title("title","摸鱼~~~~~","文档项的标题"),
         status("status","false","表示该文档项是否完成，主要用于任务类型"),
-        data("data","null","文档项定位的日期，主要用于定位每日日报的时间轴标题"),
+        data("data","null","文档项定位的日期,"),
 //        data_start/data_end的时间精度一般为日
         data_start("data_start","null","时间起点，与data_end成对表示，用于确定文档项的时间范围起点"),
         data_end("data_end","null","时间终点，与data_start成对表示，用于确定文档项的时间范围终点,null表示没有设置终点，即一直执行"),
@@ -67,12 +73,12 @@ public class DocsItemFiled {
 
     }
 
-    public static String toFiled(ItemFiled[] itemFileds){
-        StringBuilder filed=new StringBuilder();
+    public static Map<String,String> toFiled(ItemFiled[] itemFileds){
+        Map<String,String> map =new HashMap<>();
         for (ItemFiled itemFiled : itemFileds) {
-            filed.append(itemFiled.getFiled()).append(FILED_SPLIT_1).append(itemFiled.getDefault()).append(FILED_SPLIT_2);
+            map.put(itemFiled.getFiled(),itemFiled.getFiled());
         }
-        return filed.toString();
+        return map;
     }
 
     public static Map<String,String> toMap(String  filed) throws ClassNotFoundException {
@@ -90,11 +96,17 @@ public class DocsItemFiled {
 
 
     /**
-     * 该函数有点危险，会返回带有未知属性的filed,但是校验的话感觉又没必要
+     * 将初始化完成的属性集变成string
+     *
+     * 目前校验规则
+     * 1，不允许value为null
      */
     public static String  toFiled(Map<String,String> map){
         StringBuilder filed=new StringBuilder();
         for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (StringUtils.isEmpty(entry.getValue())){
+                throw new AppException(ResponseCode.programmingError);
+            }
             filed.append(entry.getKey()).append(FILED_SPLIT_1).append(entry.getValue()).append(FILED_SPLIT_2);
         }
         return filed.toString();

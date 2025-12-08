@@ -14,7 +14,8 @@ public enum ResponseCode {
      */
     RESOURCE_NOT_FOUND(404, "资源不存在"),
     MISSING_CREDENTIALS(400,    "客户端请求参数错误、格式不正确、必填字段缺失等" ),
-    NOT_PERMISSIONS(403,"文档存在，但用户权限不足");
+    NOT_PERMISSIONS(403,"文档存在，但用户权限不足"),
+    programmingError(500,"服务端程序逻辑错误" );
     private String info;
     private Integer code;
 

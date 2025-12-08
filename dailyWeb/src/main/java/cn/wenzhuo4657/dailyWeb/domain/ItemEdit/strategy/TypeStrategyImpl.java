@@ -29,21 +29,13 @@ public    class TypeStrategyImpl implements TypeStrategy {
     @Override
     public String toFiled(int type) throws ClassNotFoundException {
         DocsItemType.ItemType itemType  = router(type);
-        return TypeFunction.toField.toField(itemType);
+        return TypeFunction.toField.toField(itemType,null);
     }
 
     @Override
     public String toFiled(int type, Map<String, String> fieldMap) throws ClassNotFoundException {
-        String filed = toFiled(type);
-
-        Map<String, String> map = DocsItemFiled.toMap(filed);
-
-        for (String key : fieldMap.keySet()){
-            if (map.containsKey(key)){
-                map.put(key,fieldMap.get(key));
-            }
-        }
-        return DocsItemFiled.toFiled(map);
+        DocsItemType.ItemType itemType  = router(type);
+        return TypeFunction.toField.toField(itemType,fieldMap);
     }
 
     @Override
@@ -53,8 +45,6 @@ public    class TypeStrategyImpl implements TypeStrategy {
         List<ItemDto> list=new ArrayList<>(items.size());
 
         for (DocsItem item:items) {
-
-
             ItemDto itemDto = new ItemDto();
             itemDto.setIndex(item.getIndex().toString());
             itemDto.setTitle(getTitleFn().apply(itemType,item));
