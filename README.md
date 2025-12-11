@@ -1,6 +1,5 @@
 # FluxFlow-back
 
-日报程序后端
 前端地址：  https://github.com/wenzhuo4657/FluxFlow-Front
 
 
