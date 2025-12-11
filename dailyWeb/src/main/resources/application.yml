@@ -1,7 +1,8 @@
 server:
-  servlet:
-    context-path: /api
+#  servlet:
+#    context-path: /api
   port: 8080
+
 
 
 
@@ -57,7 +58,6 @@ sa-token:
 
 email:
   enable: false
-
 
 
 
