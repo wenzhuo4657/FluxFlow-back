@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.dailyWeb.tigger.http;
 
 
+import cn.wenzhuo4657.dailyWeb.domain.ItemEdit.model.vo.DocsItemType;
 import cn.wenzhuo4657.dailyWeb.domain.Types.ITypesService;
 
 import cn.wenzhuo4657.dailyWeb.domain.Types.model.dto.DocsDto;
@@ -44,7 +45,19 @@ public class TypeController {
         log.info("userID:{}", AuthUtils.getLoginId());
         List<TypeDto> typeDtos = typesService.getAllTypes(AuthUtils.getLoginId());
         List<TypeResponse> collect = typeDtos.stream()
+                .filter(
+                        dto->{
+
+//                            这个类型不用展示，在其他地方直接使用
+                            if (dto.getId().intValue()==DocsItemType.ItemType.StickyNote.getCode()){
+                                return false;
+                            }
+                            return  true;
+                        }
+
+                )
                 .map(dto -> new TypeResponse(dto.getId().toString(), dto.getName()))
+
                 .collect(Collectors.toList());
 
         ApiResponse<List<TypeResponse>> listApiResponse = ApiResponse.success();
