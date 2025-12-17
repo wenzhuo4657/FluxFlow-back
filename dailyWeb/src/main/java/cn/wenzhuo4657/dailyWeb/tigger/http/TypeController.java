@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.dailyWeb.tigger.http;
 
 
+import cn.wenzhuo4657.dailyWeb.domain.ItemEdit.model.vo.DocsItemType;
 import cn.wenzhuo4657.dailyWeb.domain.Types.ITypesService;
 
 import cn.wenzhuo4657.dailyWeb.domain.Types.model.dto.DocsDto;
@@ -10,6 +11,7 @@ import cn.wenzhuo4657.dailyWeb.tigger.http.dto.req.GetContentIdsByTypesRequest;
 import cn.wenzhuo4657.dailyWeb.tigger.http.dto.res.DocsResponse;
 import cn.wenzhuo4657.dailyWeb.tigger.http.dto.res.TypeResponse;
 import cn.wenzhuo4657.dailyWeb.types.utils.AuthUtils;
+import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 @Controller(value = "/types")
@@ -35,14 +39,25 @@ public class TypeController {
     private ITypesService typesService;
 
 
+
     @RequestMapping(value = "/getAllTypes")
     public ResponseEntity<ApiResponse<List<TypeResponse>>> getAllTypes() {
         log.info("userID:{}", AuthUtils.getLoginId());
         List<TypeDto> typeDtos = typesService.getAllTypes(AuthUtils.getLoginId());
-
-
         List<TypeResponse> collect = typeDtos.stream()
+                .filter(
+                        dto->{
+
+//                            这个类型不用展示，在其他地方直接使用
+                            if (dto.getId().intValue()==DocsItemType.ItemType.StickyNote.getCode()){
+                                return false;
+                            }
+                            return  true;
+                        }
+
+                )
                 .map(dto -> new TypeResponse(dto.getId().toString(), dto.getName()))
+
                 .collect(Collectors.toList());
 
         ApiResponse<List<TypeResponse>> listApiResponse = ApiResponse.success();

@@ -100,10 +100,12 @@ public class SystemServiceImpl implements SystemService {
                 // 重新创建Statement以避免锁定问题
                 try (Statement detachStmt = dataSource.getConnection().createStatement()) {
                     detachStmt.execute("DETACH DATABASE " + tempDatabaseName + ";");
+
                 }
             } catch (Exception e) {
                 throw new RuntimeException("数据库导入失败", e);
             }finally {
+
                 boolean delete = tempFile.delete();
                 System.out.println("删除临时文件：" + delete);
             }
@@ -114,6 +116,10 @@ public class SystemServiceImpl implements SystemService {
         }finally {
             alock.unlock();
         }
+
+
+
+//     todo 库表相同，但程序启动时的数据初始化不同，例如data.sql 、用户初始化
 
 
         return  true;
